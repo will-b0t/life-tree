@@ -1,0 +1,128 @@
+/* ── ai-drawer.css ────────────────────────────────────────────
+ * The right-hand drawer that surfaces AI branch suggestions.
+ * Currently deprioritized — the styles stay so the feature is
+ * a single re-enable away when we come back to it.
+ * ──────────────────────────────────────────────────────────── */
+
+#ai-drawer {
+  position: absolute; right: 0; top: 0; bottom: 0;
+  width: 280px;
+  background: var(--ai-bg);
+  border-left: 1px solid var(--ai-border);
+  z-index: 150;
+  display: flex; flex-direction: column;
+  transform: translateX(100%);
+  transition: transform .25s cubic-bezier(.25, .46, .45, .94);
+}
+#ai-drawer.open { transform: translateX(0); }
+
+#ai-header {
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid var(--ai-border);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+#ai-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ai);
+}
+#ai-close {
+  width: 22px; height: 22px; border-radius: 50%;
+  border: none; background: transparent; cursor: pointer;
+  color: var(--ai); font-size: 17px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .1s;
+}
+#ai-close:hover { background: var(--ai-border); }
+
+#ai-ctx {
+  padding: 12px 16px 4px;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; color: var(--ink-3); flex-shrink: 0;
+}
+#ai-preview {
+  margin: 0 16px 12px;
+  background: var(--paper-2);
+  border: 1px solid var(--ai-border);
+  border-radius: 5px; padding: 9px 11px;
+  font-size: 13px; color: var(--ink-2); line-height: 1.4;
+  flex-shrink: 0; min-height: 38px;
+}
+#ai-list {
+  flex: 1; overflow-y: auto;
+  padding: 4px 16px 16px;
+  display: flex; flex-direction: column; gap: 9px;
+}
+
+.ai-card {
+  background: var(--paper-2);
+  border: 1px solid var(--ai-border);
+  border-radius: 6px; padding: 11px 13px;
+  cursor: pointer;
+  transition: border-color .15s, box-shadow .15s, transform .1s;
+  position: relative;
+}
+.ai-card:hover {
+  border-color: var(--ai);
+  box-shadow: 0 2px 10px rgba(90, 58, 122, .12);
+  transform: translateY(-1px);
+}
+.ai-card-lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ai);
+  margin-bottom: 5px; opacity: .7;
+}
+.ai-card-txt { font-size: 13px; line-height: 1.45; color: var(--ink); }
+.ai-card-add {
+  position: absolute; top: 9px; right: 9px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--ai); color: white;
+  border: none; font-size: 16px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity .15s;
+}
+.ai-card:hover .ai-card-add { opacity: 1; }
+
+#ai-loading {
+  display: none;
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 12px; padding: 36px 16px;
+  color: var(--ai);
+  font-family: 'DM Mono', monospace; font-size: 10px;
+}
+#ai-loading.on { display: flex; }
+.spinner {
+  width: 26px; height: 26px;
+  border: 2px solid var(--ai-border);
+  border-top-color: var(--ai);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+#ai-empty {
+  padding: 24px 16px;
+  text-align: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; color: var(--ink-3);
+  line-height: 1.8;
+  display: none;
+}
+
+#ai-footer {
+  padding: 12px 16px;
+  border-top: 1px solid var(--ai-border);
+  flex-shrink: 0;
+}
+#ai-refresh {
+  width: 100%;
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  border: 1px solid var(--ai-border);
+  background: transparent; color: var(--ai);
+  border-radius: 4px; padding: 6px 8px;
+  cursor: pointer; transition: background .1s;
+}
+#ai-refresh:hover { background: var(--ai-border); }
+#ai-refresh:disabled { opacity: .4; cursor: not-allowed; }

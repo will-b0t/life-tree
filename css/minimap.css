@@ -1,0 +1,27 @@
+/* ── minimap.css ──────────────────────────────────────────────
+ * Bottom-right minimap. Slides over when the AI drawer is open.
+ * ──────────────────────────────────────────────────────────── */
+
+#minimap {
+  position: absolute;
+  bottom: 50px; right: 16px;
+  width: 140px; height: 88px;
+  background: var(--paper-2);
+  border: 1px solid var(--ink-3);
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 140;
+  cursor: pointer;
+  transition: right .25s;
+}
+
+/* Move out of the way when the AI drawer opens. */
+#ai-drawer.open ~ #minimap { right: 296px; }
+
+#mm-vp {
+  position: absolute;
+  border: 1.5px solid var(--canon);
+  border-radius: 2px;
+  background: rgba(122, 79, 46, .08);
+  pointer-events: none;
+}

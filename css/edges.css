@@ -1,0 +1,43 @@
+/* ── edges.css ────────────────────────────────────────────────
+ * Edge labels (the small pills that sit on connector lines).
+ * Edge paths themselves are SVG drawn from js/edges.js.
+ * ──────────────────────────────────────────────────────────── */
+
+.edge-label-wrap {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: all;
+  z-index: 5;
+}
+
+.edge-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--ink-3);
+  background: var(--paper);
+  border: 1px solid var(--faded-border);
+  border-radius: 10px;
+  padding: 2px 7px;
+  cursor: text;
+  outline: none;
+  white-space: nowrap;
+  min-width: 16px;
+  text-align: center;
+  transition: border-color .15s;
+}
+.edge-label:empty::before {
+  content: attr(data-placeholder);
+  opacity: .4;
+  pointer-events: none;
+}
+.edge-label:focus,
+.edge-label:hover {
+  border-color: var(--ink-3);
+  color: var(--ink-2);
+}
+
+.edge-label-wrap.canon-edge .edge-label {
+  border-color: var(--canon-label);
+  color: var(--canon);
+  background: var(--canon-bg);
+}
