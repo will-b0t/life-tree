@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life Tree</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/edges.css">
+<link rel="stylesheet" href="css/nodes.css">
+<link rel="stylesheet" href="css/ai-drawer.css">
+<link rel="stylesheet" href="css/minimap.css">
+<link rel="stylesheet" href="css/toolbar.css">
+<link rel="stylesheet" href="css/library.css">
+</head>
+<body>
+<!-- Home screen / library -->
+<div id="home">
+  <div id="home-header">
+    <div id="home-title">Life Tree</div>
+    <div id="home-subtitle">a journal that thinks</div>
+  </div>
+  <div id="home-empty">no trees yet · start one below</div>
+  <div id="home-grid"></div>
+</div>
+
+<div id="app">
+  <div id="grid-bg"></div>
+  <div id="canvas"><svg id="edges" width="8000" height="8000"></svg></div>
+
+  <!-- AI Drawer -->
+  <div id="ai-drawer">
+    <div id="ai-header">
+      <div id="ai-title">✦ ai branches</div>
+      <button id="ai-close">×</button>
+    </div>
+    <div id="ai-ctx">branching from</div>
+    <div id="ai-preview">—</div>
+    <div id="ai-loading"><div class="spinner"></div><span>imagining paths…</span></div>
+    <div id="ai-list"></div>
+    <div id="ai-empty">Select a node, then click ✦ suggest<br>to generate branch ideas from Claude.</div>
+    <div id="ai-footer"><button id="ai-refresh" disabled>↺ new suggestions</button></div>
+  </div>
+
+  <!-- Toolbar -->
+  <div id="toolbar">
+    <button class="tbtn" id="btn-library">← library</button>
+    &nbsp;·&nbsp;
+    <button class="tbtn ai" id="btn-ai">✦ suggest</button>
+    <button class="tbtn" id="btn-fit">⊡ fit</button>
+    <button class="tbtn" id="btn-layout">⟳ layout</button>
+    <button class="tbtn" id="btn-save">💾 save</button>
+    <div class="tbtn-group" id="share-group">
+      <button class="tbtn" id="btn-share">↗ share</button>
+      <div class="tbtn-menu" id="share-menu">
+        <button data-action="json">↓ Save as JSON</button>
+        <button data-action="png">↓ Save as PNG</button>
+        <button data-action="import">↑ Load JSON</button>
+      </div>
+    </div>
+    <button class="tbtn danger" id="btn-clear">✕ clear</button>
+  </div>
+
+  <div id="toast"></div>
+  <div id="reparent-hint">drop onto a node to re-attach · release to cancel</div>
+  <div id="help">
+    hover node → drag ⊕ to branch · drag ↕ to re-parent<br>
+    select node → ✦ suggest · ▾/▸ collapse · ◆ canonize<br>
+    double-click near edge → add label
+  </div>
+  <div id="zoom-ind">100%</div>
+
+  <!-- Minimap -->
+  <div id="minimap">
+    <canvas id="mm-canvas" width="140" height="88"></canvas>
+    <div id="mm-vp"></div>
+  </div>
+
+  <div class="grain"></div>
+</div>
+
+<!-- Drag ghosts (live outside #app so they can position freely in viewport space) -->
+<div id="ghost-branch">
+  <div style="font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--branch);font-family:'DM Mono',monospace;margin-bottom:3px;">new branch</div>
+  <div style="font-size:13px;color:var(--ink-3);font-style:italic;">drop to place…</div>
+</div>
+<div id="reparent-ghost"></div>
+
+<!-- Scripts load in dependency order. state.js must be first; index.js boots last. -->
+<script src="js/state.js"></script>
+<script src="js/persistence.js"></script>
+<script src="js/canvas.js"></script>
+<script src="js/edges.js"></script>
+<script src="js/minimap.js"></script>
+<script src="js/collapse.js"></script>
+<script src="js/canon.js"></script>
+<script src="js/panels.js"></script>
+<script src="js/nodes.js"></script>
+<script src="js/reparent.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/export.js"></script>
+<script src="js/history.js"></script>
+<script src="js/library.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>
